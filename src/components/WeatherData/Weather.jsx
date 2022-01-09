@@ -1,7 +1,7 @@
 import Day from './Day/Day';
-// import Image from './Image';
+import Image from './Image';
 import Temperature from './Temperature/Temperature';
-import { Card } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 
 
 import './Weather.css';
@@ -9,7 +9,7 @@ import './Weather.css';
 const Weather = ({ data }) => {
     return (
         <Card className='card today'>
-            {/* <Image id={data.icon} /> */}
+            <Image id={data.icon} />
             <Day day={data.date} />
             <Temperature min={data.min} max={data.max} />
         </Card>

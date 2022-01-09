@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    border-radius: 5px;
+    padding: 4px;
+    margin: 10px;
+}
+
+button {
+    border-color: orange;
+    border-radius: 5px;
+    margin: 10px;
+    color: black;
+    background-color: orange;
+
+}
+
+@media (max-width: 450px) {
+    form {
+        flex-direction: column;
+    }
+}

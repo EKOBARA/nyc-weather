@@ -1,15 +1,17 @@
-const SearchForm = ({ zip, setZip, handleSubmit }) => {
+import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
+import './SearchForm.css';
 
+const SearchForm = ({ zip, setZip, handleSubmit }) => {
     return (
-        <form onSubmit={handleSubmit}>
-            <input 
+        <form className='form' onSubmit={handleSubmit}>
+            <Form.Control 
                 type="text"
                 placeholder="Enter ZIP Code"
                 onChange={(e) => setZip(e.target.value)}
                 value={zip}
-                
-            />
-            <button type='submit'>Search</button>
+                />
+            <Button type='submit'>Search</Button>
         </form>
     );
 };

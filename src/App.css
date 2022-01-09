@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.App {
+    align-items: center;
+}
+h1 {
+    font-size: 2rem;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  background-color: papayawhip;
+}
+
+@media (max-width: 450px) {
+    h1 {
+        font-size: 1rem;
+    }
+}

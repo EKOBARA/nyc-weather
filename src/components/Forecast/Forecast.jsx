@@ -1,11 +1,14 @@
-import Weather from '../WeatherData/Weather'
+import Weather from '../WeatherData/Weather';
+import { CardGroup } from 'react-bootstrap';
+import './Forecast.css';
+
 const Forecast = ( { data }) => {
     return (
-        <div>
+        <CardGroup className='card-group'>
             {data.map((day, idx) => (
                 <Weather key={idx} data={day} />
             ))}
-        </div>
+        </CardGroup>
     );
 };
 
