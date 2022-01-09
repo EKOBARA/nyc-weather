@@ -7,46 +7,52 @@ import './App.css';
 import Forecast from './components/Forecast/Forecast';
 
 function App() {
-  const [zip, setZip] = useState('');
+  const [zip, setZip] = useState();
   const [data, setData] = useState([]);
-
-  const apiUrl = (zip) => {
-    return `https://api.openweathermap.org/data/2.5/forecast?zip=${zip},us&appid=${process.env.REACT_APP_API_KEY}`;
+  
+  const apiUrl = (zip=10460) => {
+    return `https://api.openweathermap.org/data/2.5/forecast?zip=${zip},us&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
   }
 
   
-  const getWeather = async () => {
-    try {
-      const res = await axios.get(apiUrl(zip));
-      const data = res.data.list;
+	const getWeather = async () => {
+		try {
+			const res = await axios.get(apiUrl(zip));
+			const data = res.data.list;
+		
+      const dataArr = data
+        .filter((_, idx) => idx % 8 === 0)
+        .map((d) => {
+          const { dt_txt, main, weather } = d;
 
-      console.log(data)
-      const dataArr = data.filter((_, idx) => idx % 8 === 0).map((d) => {
-				const { dt_txt, main, weather } = d;
+          const icon = weather[0].icon.slice(0, -1);
+          const min = (main.temp_min * 9/5 + 32).toFixed() ;
+			    const max = (main.temp_max * 9/5 + 32).toFixed() ;
+          const date = new Date(dt_txt).toLocaleDateString('en-US', {
+            weekday: 'short',
+          });
 
-				const icon = weather[0].icon.slice(0, -1);
-				const min = main.temp_min.toFixed();
-				const max = main.temp_max.toFixed();
-				const date = new Date(dt_txt).toLocaleDateString('en-US',{ weekday: 'short' });
+          return { date, max, min, icon };
+        });
+			setData(dataArr);
+     
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-				return { date, max, min, icon };
-			});
-      console.log(dataArr);
-      setData(dataArr);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-    
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		getWeather();
+	};
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     getWeather();
-  } 
+  }, [])
 
   return (
-    <div className="App">
+    <div className="app">
+      <h1>NEW YORK CITY WEATHER</h1>
       <SearchForm 
         zip={zip}
         setZip={setZip}
